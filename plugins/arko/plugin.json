@@ -1,0 +1,28 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "arko",
+  "version": "0.1.1",
+  "description": "Scaffold and maintain FastAPI applications with optional React, and guide native Rust desktop development with Cargo.",
+  "author": {
+    "name": "Joel Gangini"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Arko",
+        "shortDescription": "Apps Python y guía Rust",
+        "longDescription": "Inicializa aplicaciones FastAPI por funcionalidades con React opcional, recupera contexto y comprueba contratos y dependencias. Incluye una guía para aplicaciones de escritorio con interfaz nativa en Rust y validación con Cargo.",
+        "developerName": "Joel Gangini",
+        "category": "Productivity",
+        "capabilities": ["Read", "Write"],
+        "defaultPrompt": [
+          "Usa Arko para inicializar una aplicación Python con React opcional.",
+          "Usa Arko para localizar una funcionalidad y verificar sus cambios."
+        ],
+        "brandColor": "#000000",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/icon.png"
+      }
+    }
+  }
+}

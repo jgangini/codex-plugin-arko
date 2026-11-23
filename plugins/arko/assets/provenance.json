@@ -1,0 +1,10 @@
+{
+  "source": "app/frontend/public/favicon-256.png in the project supplied by the author",
+  "sha256": "80b384a9eca92b0bc88f1dc5181a6875a010591c24083227340b697dcd7100a5",
+  "file": "icon.png",
+  "sourceUsage": "app/frontend/index.html favicon-256.png",
+  "authorization": "User requested reuse for Arko on 2026-11-03",
+  "background": "Original black background preserved",
+  "rights": "Existing user-provided project asset; no additional license inferred",
+  "transformations": []
+}

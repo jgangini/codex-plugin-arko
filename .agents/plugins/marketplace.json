@@ -1,0 +1,10 @@
+{
+  "name": "arko-local",
+  "interface": {"displayName": "Arko local"},
+  "plugins": [{
+    "name": "arko",
+    "source": {"source": "local", "path": "./plugins/arko"},
+    "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+    "category": "Productivity"
+  }]
+}

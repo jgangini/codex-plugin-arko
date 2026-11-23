@@ -1,0 +1,2 @@
+# Contract approvals record the SHA-256 of exact baseline bytes.
+**/contracts/baseline.json -text
