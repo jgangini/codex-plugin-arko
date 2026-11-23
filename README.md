@@ -1,144 +1,57 @@
-# Arko 0.1
+<h1 align="center">Arko</h1>
 
-Plugin de Codex para crear y mantener aplicaciones Python por funcionalidades,
-con React/TypeScript opcional. Incluye skill, CLI propia, plantillas, contratos,
-mapas comprobables y ejemplo de aceptación. No instala un runtime de agentes LLM.
+<p align="center">
+  <img src="docs/assets/arko-cover.png" width="960" alt="Ilustración de un servicio modular, un contrato OpenAPI y una interfaz web opcional, con una guía de escritorio separada.">
+</p>
 
-Autor: **Joel Gangini**. El icono reutiliza un favicon con fondo negro entregado
-por el autor y conserva su imagen original.
+<p align="center"><em>Crea una API en FastAPI y añade React cuando lo necesites.</em></p>
 
-Se eligió **FastAPI + React/Vite** para permitir empezar solo con backend y añadir
-una UI mediante OpenAPI. [Comparación, fuentes y licencias](plugins/arko/skills/arko/references/research.md).
-El estándar común está separado del perfil técnico; no se impone estética ni
-pantallas de producto. El formulario de notas existe solo en el ejemplo.
+<p align="center">
+  <a href="plugins/arko/plugin.json"><img src="https://img.shields.io/badge/Plugin-0.1.1-165D63?style=flat-square" alt="Versión del plugin 0.1.1"></a>
+  <a href="#instalar-en-codex"><img src="https://img.shields.io/badge/Codex-Plugin_local-303640?style=flat-square" alt="Plugin local de Codex"></a>
+  <a href="docs/tutorial.md"><img src="https://img.shields.io/badge/Python-3.12%20%2F%203.13-215C8D?style=flat-square&amp;logo=python&amp;logoColor=white" alt="Requiere Python 3.12 o 3.13"></a>
+</p>
 
-## Escritorio con Rust
+<p align="center"><strong>Tecnologías</strong></p>
 
-Para proyectos con lógica e interfaz nativas, pide «usa Arko para crear una
-aplicación de escritorio nativa en Rust». La [guía de escritorio](plugins/arko/skills/arko/references/rust-desktop.md)
-ayuda a elegir Iced o egui, organizar la lógica y verificar el proyecto con Cargo.
-La generación automatizada de Arko se describe en el flujo FastAPI siguiente.
+<p align="center">
+  <a href="docs/architecture.md"><img src="https://img.shields.io/badge/FastAPI-0E695D?style=flat-square&amp;logo=fastapi&amp;logoColor=white" alt="FastAPI"></a>
+  <a href="docs/architecture.md"><img src="https://img.shields.io/badge/OpenAPI-456326?style=flat-square&amp;logo=openapiinitiative&amp;logoColor=white" alt="OpenAPI"></a>
+  <a href="docs/architecture.md"><img src="https://img.shields.io/badge/React-Opcional-195F72?style=flat-square&amp;logo=react&amp;logoColor=white" alt="React opcional"></a>
+  <a href="plugins/arko/skills/arko/references/rust-desktop.md"><img src="https://img.shields.io/badge/Rust-Gu%C3%ADa_de_escritorio-8B4B2E?style=flat-square&amp;logo=rust&amp;logoColor=white" alt="Rust, guía de escritorio"></a>
+</p>
 
-## Empezar
+<p align="center">
+  <a href="#instalar-en-codex">Instalar</a> ·
+  <a href="docs/tutorial.md">Crear la primera API</a> ·
+  <a href="docs/architecture.md">Arquitectura</a> ·
+  <a href="docs/testing.md">Pruebas</a>
+</p>
 
-Requisitos: Python 3.12+, uv, Node >=22.12 para React; Docker para construir imágenes.
-Desde este repositorio (PowerShell; `python` debe ser un intérprete real):
+## Qué puedes hacer
 
-```powershell
-python plugins/arko/skills/arko/scripts/arko.py init ../mi-app
-python ../mi-app/tools/arko.py setup --root ../mi-app
-python ../mi-app/tools/arko.py check --root ../mi-app
-python ../mi-app/tools/arko.py dev --root ../mi-app
-```
-
-Añadir una funcionalidad y React más tarde:
-
-```powershell
-python ../mi-app/tools/arko.py add-feature notes --root ../mi-app
-python ../mi-app/tools/arko.py frontend --root ../mi-app
-```
-
-Montar `create_router(Store())` de la funcionalidad en `backend/app/main.py` antes
-del montaje estático. Componer el componente desde App.tsx según el producto.
-Cuando la API esté lista para publicarse, declarar los métodos y rutas en
-`features.<nombre>.public_routes` de `.arko/project.json`. Por ejemplo,
-`["POST /api/notes", "GET /api/notes/{item_id}"]`. `check`, `contract` y
-`accept-contract` verifican estas operaciones desde la aplicación FastAPI real
-y su OpenAPI. `check` también protege las operaciones del contrato aprobado, incluso
-en proyectos sin `public_routes`. El listado sirve para declarar operaciones
-antes de su primera aprobación.
-Luego `setup`, `contract`, revisar el diff, `accept-contract --reason "..."` y
-`check`. La composición es explícita; añadir archivos no modifica rutas en secreto.
-Para varias funcionalidades, aliasar `create_router` y `Store` al importarlos.
-Los modelos nuevos publican nombres OpenAPI que incluyen la funcionalidad, como
-`CreateItem_notes` e `Item_notes`. Al actualizar la plantilla para futuras
-funcionalidades, conservar los nombres incluidos en los contratos ya aprobados.
-
-## Ejemplo reproducible
-
-Consulta el [mapa del repositorio de Notes](examples/notes/docs/repository-map.md)
-para ubicar sus reglas y decisiones.
-
-```powershell
-python examples/notes/tools/arko.py setup --root examples/notes
-python examples/notes/tools/arko.py check --root examples/notes
-python examples/notes/tools/arko.py context notes --root examples/notes
-$env:ARKO_API_TOKEN = python -c "import secrets; print(secrets.token_urlsafe(32))"
-python examples/notes/tools/arko.py dev --root examples/notes
-```
-
-Abrir http://127.0.0.1:5173 e introducir el token local en el formulario. Obtenerlo
-desde la variable local del shell; no guardarlo en código ni en VITE_*. El token
-solo vive en memoria del componente. API/docs: http://127.0.0.1:8000/docs.
-Ctrl+C termina ambos procesos. Reiniciar `dev` después de cambios Python; Vite
-mantiene su actualización habitual. El almacén en memoria se pierde al reiniciar.
-
-```powershell
-python examples/notes/tools/arko.py docker --root examples/notes --tag arko-notes:local
-docker run --rm -p 127.0.0.1:8000:8000 -e ARKO_API_TOKEN arko-notes:local
-```
-
-La imagen full stack sirve el frontend en http://127.0.0.1:8000. Backend-only usa
-Dockerfile; con React usa Dockerfile.web. No se publica ninguna imagen. Las bases
-Docker tienen etiquetas de versión, no digest inmutable: fijar digest por plataforma
-es un paso pendiente para reproducibilidad binaria y política de actualizaciones.
+| Punto de partida | Qué ofrece Arko |
+| --- | --- |
+| **API o servicio en Python** | Genera una base FastAPI organizada por funcionalidades con un contrato OpenAPI y comprobaciones locales. |
+| **Aplicación web** | Añade un frontend React y TypeScript durante la creación o cuando el backend esté listo. |
+| **Escritorio en Rust** | Orienta la elección de Iced o egui, la organización de la lógica y la validación con Cargo. [Guía de escritorio](plugins/arko/skills/arko/references/rust-desktop.md) |
 
 ## Instalar en Codex
 
-Paquete fuente: `plugins/arko`. `python scripts/package.py` genera el ZIP en
-`artifacts/` con la versión declarada en `plugins/arko/plugin.json`. El catálogo
-del repo está en `.agents/plugins/marketplace.json`. Registrar desde el cliente:
+Desde la carpeta del repositorio, en un cliente con gestión de plugins por CLI:
 
 ```powershell
 codex plugin marketplace add (Get-Location).Path
 codex plugin add arko@arko-local
-codex plugin list --marketplace arko-local --json
 ```
 
-Estos comandos están disponibles en la CLI local comprobada. En clientes sin
-`plugin add`, abrir el directorio de plugins, elegir **Arko local** e instalar Arko.
-Si el cliente ya estaba abierto, reiniciar o abrir una sesión nueva para cargarlo.
-Crear el ZIP o el catálogo por sí solo no registra ni instala el plugin.
-La [documentación oficial](https://developers.openai.com/plugins/build/plugins)
-distingue marketplace local, instalación y publicación. Pedir «usa Arko para
-inicializar una aplicación»; la skill ejecuta la CLI empaquetada. No existen
-comandos nativos `codex arko` ni slash commands de Arko.
+Abre un chat de Codex en tu espacio de trabajo y pide «Usa Arko para crear una API». Para probar la CLI por tu cuenta, sigue el [tutorial](docs/tutorial.md). Necesitas Python 3.12 o 3.13 y uv. Para React, necesitas Node.js 22.12 o posterior.
 
-## Operaciones y mantenimiento
+## Documentación
 
-`init`, `add-feature`, `frontend`, `context`, `map`, `setup`, `contract`,
-`accept-contract`, `check`, `dev`, `docker`, `upgrade`.
-Consultar `--help` y [el workflow](plugins/arko/skills/arko/references/workflow.md).
+- [Arquitectura](docs/architecture.md) para entender qué genera Arko y cómo comprueba el contrato.
+- [Pruebas y validación](docs/testing.md) para comprobar el generador y la aplicación de ejemplo.
+- [Ejemplo Notes](examples/notes/docs/repository-map.md) para explorar una funcionalidad con backend y frontend.
+- [Flujo de mantenimiento](plugins/arko/skills/arko/references/workflow.md) para añadir funcionalidades, renovar el contrato y revisar actualizaciones.
 
-`context` devuelve archivos actuales, símbolos/imports Python, hashes, dependencias,
-consumidores declarados y estado pendiente. Si una prueba en `backend/tests` usa
-imports dinámicos, su entrada conserva los imports estáticos y añade las líneas
-que requieren revisión en `dynamic_import_lines`. La auditoría de límites del
-código de aplicación sigue rechazando los imports dinámicos. `check`
-detecta mapas obsoletos; `map` los actualiza solo por petición explícita.
-`upgrade` muestra diffs y personalizaciones, sin escribir. No hay migraciones entre
-versiones todavía. Para adoptar una corrección del estándar en un proyecto
-existente, integrar los cambios de su CLI, conservar las personalizaciones y
-ejecutar `check` contra el contrato aprobado. Corregir los hallazgos en el código
-o revisar expresamente el cambio de contrato antes de aceptarlo. El ejemplo bajo
-tools delega a la CLI del plugin en este repositorio; conservar ambas carpetas
-juntas. Las aplicaciones generadas con
-`init` sí incluyen su propia CLI y plantillas, y funcionan fuera de este repositorio.
-El generador instala `AGENTS.md` desde `templates/base/agent-instructions.md`.
-
-`check` compara los bytes de `contracts/baseline.json` con el SHA-256 de la
-última aprobación en `contracts/acceptance.json`. Si difieren, recuperar el
-archivo aprobado o revisar el OpenAPI actual y ejecutar `accept-contract` con
-un motivo. `init` registra la aprobación inicial. Las plantillas preservan los
-bytes del contrato en Git para que el hash sea estable entre plataformas.
-
-Validación de desarrollo: `./scripts/arch-preflight.ps1`, cambios y
-`./scripts/arch-postflight.ps1`. La ruta unificada usa `scripts/validate.py`;
-`--docker` incluye build y smoke tests. [Criterios](docs/acceptance.md),
-[evidencia y límites](docs/validation.md). No se mide productividad comparativa.
-
-Pendiente para producción: identidad multiusuario real, almacenamiento durable,
-TLS/límites operativos según despliegue y política de compatibilidad ampliada.
-El guardia de contratos no implementa toda la semántica OpenAPI y el análisis de
-dependencias no demuestra todas las relaciones en runtime. No se garantiza que
-notas e índices conserven por sí solos todo el contexto de una sesión.
+Arko es un proyecto de Joel Gangini.
