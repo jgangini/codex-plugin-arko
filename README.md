@@ -1,7 +1,7 @@
 <h1 align="center">Arko</h1>
 
 <p align="center">
-  <img src="docs/assets/arko-cover.png" width="960" alt="Ilustración de un servicio modular, un contrato OpenAPI y una interfaz web opcional, con una guía de escritorio separada.">
+  <img src="docs/assets/arko-mascot.png" width="320" alt="Un zorro constructor ensambla dos bloques de código, como Arko organiza una aplicación por módulos.">
 </p>
 
 <p align="center"><em>Crea una API en FastAPI y añade React cuando lo necesites.</em></p>
