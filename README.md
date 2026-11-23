@@ -1,12 +1,13 @@
-<h1 align="center">Arko</h1>
-
 <p align="center">
-  <img src="docs/assets/arko-mascot.png" width="320" alt="Un zorro constructor ensambla dos bloques de código, como Arko organiza una aplicación por módulos.">
+  <img src="docs/assets/arko-mascot.png" width="224" alt="Un zorro constructor ensambla dos bloques de código, como Arko organiza una aplicación por módulos.">
 </p>
+
+<h3 align="center">Arko</h3>
 
 <p align="center"><em>Crea una API en FastAPI y añade React cuando lo necesites.</em></p>
 
 <p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/Licencia-MIT-165D63?style=flat-square" alt="Licencia MIT"></a>
   <a href="plugins/arko/plugin.json"><img src="https://img.shields.io/badge/Plugin-0.1.1-165D63?style=flat-square" alt="Versión del plugin 0.1.1"></a>
   <a href="#instalar-en-codex"><img src="https://img.shields.io/badge/Codex-Plugin_local-303640?style=flat-square" alt="Plugin local de Codex"></a>
   <a href="docs/tutorial.md"><img src="https://img.shields.io/badge/Python-3.12%20%2F%203.13-215C8D?style=flat-square&amp;logo=python&amp;logoColor=white" alt="Requiere Python 3.12 o 3.13"></a>
@@ -54,4 +55,6 @@ Abre un chat de Codex en tu espacio de trabajo y pide «Usa Arko para crear una 
 - [Ejemplo Notes](examples/notes/docs/repository-map.md) para explorar una funcionalidad con backend y frontend.
 - [Flujo de mantenimiento](plugins/arko/skills/arko/references/workflow.md) para añadir funcionalidades, renovar el contrato y revisar actualizaciones.
 
-Arko es un proyecto de Joel Gangini.
+## Licencia
+
+Arko es un proyecto de Joel Gangini. El código y la documentación se distribuyen bajo la [licencia MIT](LICENSE).

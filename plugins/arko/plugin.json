@@ -6,6 +6,7 @@
   "author": {
     "name": "Joel Gangini"
   },
+  "license": "MIT",
   "extensions": {
     "com.openai": {
       "interface": {
