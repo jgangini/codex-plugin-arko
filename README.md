@@ -54,7 +54,3 @@ Abre un chat de Codex en tu espacio de trabajo y pide «Usa Arko para crear una 
 - [Pruebas y validación](docs/testing.md) para comprobar el generador y la aplicación de ejemplo.
 - [Ejemplo Notes](examples/notes/docs/repository-map.md) para explorar una funcionalidad con backend y frontend.
 - [Flujo de mantenimiento](plugins/arko/skills/arko/references/workflow.md) para añadir funcionalidades, renovar el contrato y revisar actualizaciones.
-
-## Licencia
-
-Arko es un proyecto de Joel Gangini. El código y la documentación se distribuyen bajo la [licencia MIT](LICENSE).
